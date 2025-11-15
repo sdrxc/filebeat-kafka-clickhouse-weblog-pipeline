@@ -1,0 +1,13 @@
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /usr/share/logs/access.log
+    scan_frequency: 1s
+    backoff: 1s
+    ignore_older: 0
+
+output.kafka:
+  hosts: ["kafka:29092"]
+  topic: "web_logs"
+  required_acks: 1
