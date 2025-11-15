@@ -25,31 +25,7 @@ This repository demonstrates a simple streaming pipeline that:
 4. `grafana` can be connected to ClickHouse to build dashboards.
 
 
-┌────────────────┐       ┌─────────────────────┐       ┌──────────────────────┐
-│ Log Generator  │  ---> │   Filebeat Shipper   │ ----> │        Kafka          │
-│ (simulate logs)│       │  (collect log files) │       │  (real-time buffer)   │
-└────────────────┘       └─────────────────────┘       └──────────────────────┘
-                                                                    │
-                                                                    ▼
-                                                       ┌────────────────────────┐
-                                                       │ Python Stream Processor │
-                                                       │ (consume, parse, load) │
-                                                       └────────────────────────┘
-                                                                    │
-                                                                    ▼
-                                                       ┌────────────────────────┐
-                                                       │       ClickHouse        │
-                                                       │ (fast OLAP DB for logs) │
-                                                       └────────────────────────┘
-                                                                    │
-                                                                    ▼
-                                                       ┌────────────────────────┐
-                                                       │        Grafana          │
-                                                       │  (dashboards & charts)  │
-                                                       └────────────────────────┘
-
-
-
+<img width="727" height="540" alt="Screenshot 2025-11-15 at 8 02 56 PM" src="https://github.com/user-attachments/assets/eaf6566a-9f8e-402c-9178-d41cff42cc20" />
 
 ## Prerequisites
 
