@@ -1,4 +1,4 @@
-# Log Pipeline (beg-pro1)
+# Real time web-log ingestion pipeline
 
 A minimal end-to-end log pipeline demo using Filebeat → Kafka → Python processor → ClickHouse, with Grafana available for visualization.
 
