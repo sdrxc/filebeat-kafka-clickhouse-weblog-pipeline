@@ -24,6 +24,33 @@ This repository demonstrates a simple streaming pipeline that:
 3. `python-processor` consumes the topic, parses each log entry and inserts a row into ClickHouse table `processed_logs`.
 4. `grafana` can be connected to ClickHouse to build dashboards.
 
+
+┌────────────────┐       ┌─────────────────────┐       ┌──────────────────────┐
+│ Log Generator  │  ---> │   Filebeat Shipper   │ ----> │        Kafka          │
+│ (simulate logs)│       │  (collect log files) │       │  (real-time buffer)   │
+└────────────────┘       └─────────────────────┘       └──────────────────────┘
+                                                                    │
+                                                                    ▼
+                                                       ┌────────────────────────┐
+                                                       │ Python Stream Processor │
+                                                       │ (consume, parse, load) │
+                                                       └────────────────────────┘
+                                                                    │
+                                                                    ▼
+                                                       ┌────────────────────────┐
+                                                       │       ClickHouse        │
+                                                       │ (fast OLAP DB for logs) │
+                                                       └────────────────────────┘
+                                                                    │
+                                                                    ▼
+                                                       ┌────────────────────────┐
+                                                       │        Grafana          │
+                                                       │  (dashboards & charts)  │
+                                                       └────────────────────────┘
+
+
+
+
 ## Prerequisites
 
 - Docker and Docker Compose installed.
