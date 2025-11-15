@@ -43,7 +43,7 @@ Run from the project root (where `docker-compose.yml` is located):
 
 3. Visit services in your browser:
 - Grafana: http://localhost:3000
-- ClickHouse HTTP: http://localhost:8123
+- ClickHouse HTTP: http://localhost:8123/play
 
 Note: Kafka is reachable from host at `localhost:9092` (containers use `kafka:29092`).
 
