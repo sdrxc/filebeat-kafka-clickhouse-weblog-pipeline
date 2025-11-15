@@ -96,3 +96,46 @@ ORDER BY ts;
 ---
 
 If you want, I can add a sample Grafana dashboard JSON and instructions to connect Grafana to ClickHouse.
+
+
+FINAL STEPS TO HOST
+- docker compose up --build -d
+- docker ps
+      filebeat-kafka-clickhouse-weblog-pipeline-python-processor-1 ✔ running
+      filebeat-kafka-clickhouse-weblog-pipeline-filebeat-1     ✔ running
+      filebeat-kafka-clickhouse-weblog-pipeline-kafka-1        ✔ running
+      filebeat-kafka-clickhouse-weblog-pipeline-grafana-1      ✔ running
+      filebeat-kafka-clickhouse-weblog-pipeline-clickhouse-1   ✔ running
+      filebeat-kafka-clickhouse-weblog-pipeline-zookeeper-1    ✔ running
+      
+- docker exec -it log-pipeline-kafka-1 bash
+      kafka-console-consumer --bootstrap-server kafka:29092 --topic web_logs --from-beginning
+- View all logs -> docker compose logs -f
+- logs
+-    docker compose logs -f python-processor
+-   docker compose logs -f filebeat
+
+🛠️ Services (via Docker Compose)
+docker compose config --services
+
+clickhouse
+zookeeper
+kafka
+python-processor
+filebeat
+grafana
+log-producer
+1. Zookeeper
+Required by Kafka for cluster coordination.
+2. Kafka
+Message broker that stores all log events.
+3. Log Producer
+Python script that simulates real-world access logs.
+4. Filebeat
+Lightweight log shipper that tails access.log and pushes each line into Kafka.
+5. Python Processor
+Consumes Kafka events, parses Apache logs, inserts structured rows into ClickHouse.
+6. ClickHouse
+Fast columnar OLAP database used to store parsed logs.
+7. Grafana
+Dashboards for visualization
